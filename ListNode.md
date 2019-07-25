@@ -1,9 +1,12 @@
 
+#         ListTest
 
-public class ListTest {
-	
+	public class ListTest {
+
+##	 查出倒数第K个节点的值	
+
 	/**
-	 * #查出倒数第K个节点的值#
+	 * 查出倒数第K个节点的值
 	 * 
 	 * 思路：
 	 * 首先定义一个长度为k的📏；然后往后移动直至📏的尾到最后一个；
@@ -34,6 +37,8 @@ public class ListTest {
 		return begin;
 
     }
+##	 删除单向链表中间的某个结点
+    
 	/**
 	 * 删除单向链表中间的某个结点，假定你只能访问该结点。
 	 * 给定待删除的节点，请执行删除操作，
@@ -53,6 +58,8 @@ public class ListTest {
 	        pNode.next = pNode.next.next;
 	        return true;
 	    }
+	 
+##	 以给定值x为基准将链表分割成两部分，所有小于x的结点排在大于或等于x的结点之前
 	 
 	 /**
 	  * 以给定值x为基准将链表分割成两部分，所有小于x的结点排在大于或等于x的结点之前
@@ -98,6 +105,9 @@ public class ListTest {
     	 
     	 return small.next;
 	 }
+	 
+ ##	  给定两个链表ListNode* A，ListNode* B，请返回A+B的结果(ListNode*)。
+	 
 	 /**
 	  * 给定两个链表ListNode* A，ListNode* B，请返回A+B的结果(ListNode*)。
 	  * 
@@ -157,6 +167,9 @@ public class ListTest {
 		 
 		 return result.next;
 	 }
+	 
+ ##	  给定一个链表ListNode* pHead，请返回一个bool，代表链表是否为回文。
+	 
 	 /**
 	  * 给定一个链表ListNode* pHead，请返回一个bool，代表链表是否为回文。
 	  * 
@@ -185,6 +198,9 @@ public class ListTest {
 		 return true;
 	 }
 	 /**
+	 
+##	  main函数
+	 
 	  * main函数
 	  * Test测试
 	  * @param args
@@ -197,10 +213,10 @@ public class ListTest {
 		 list.next.next = new  ListNode(1);
 		// list.next.next.next = new  ListNode(4);
 		 ListNode list1 = new ListNode(0);
-//		 list1.next = new  ListNode(7);
-//		 list1.next.next = new  ListNode(6);
-//		 list1.next.next.next = new  ListNode(5);
-//		 
+	//	list1.next = new  ListNode(7);
+	//	list1.next.next = new  ListNode(6);
+	//	list1.next.next.next = new  ListNode(5);
+	//		 
 	//	 System.out.println(1/10+" , "+1%10);
 		 
 		 ListNode result = plusAB(list,list1);
@@ -212,12 +228,15 @@ public class ListTest {
 		 
 	}
 	 
-}
-class ListNode {
-    int val;
-    ListNode next = null;
+	}
+	
+##     定义链表的数据结构   ListNode
+	
+	class ListNode {
+	    int val;
+	    ListNode next = null;
 
-    ListNode(int val) {
-        this.val = val;
-    }
-}
+	    ListNode(int val) {
+		this.val = val;
+	    }
+	}
