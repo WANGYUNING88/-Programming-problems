@@ -58,6 +58,13 @@ public class ListTest {
 	  * 以给定值x为基准将链表分割成两部分，所有小于x的结点排在大于或等于x的结点之前
 	  * 给定一个链表的头指针 ListNode* pHead，请返回重新排列后的链表的头指针。
 	  * 注意：分割以后保持原来的数据顺序不变。
+	  * 
+	  * 
+	  * 
+	  * 思路：
+	  * 首先从头遍历链表，将大于等于和小于x分为两组；
+	  * 然后让小的最后一个的next指向大的头就行
+	  * 
 	  * @param pHead
 	  * @param x
 	  * @return
@@ -93,6 +100,14 @@ public class ListTest {
 	 }
 	 /**
 	  * 给定两个链表ListNode* A，ListNode* B，请返回A+B的结果(ListNode*)。
+	  * 
+	  * 
+	  * 思路：
+	  * 分别计算每一个结点，
+	  * 除10取整作为进位数，
+	  * 除10取余作为本位数，
+	  * 存到该结点中。
+	  * 
 	  * @param a
 	  * @param b
 	  * @return
@@ -144,12 +159,31 @@ public class ListTest {
 	 }
 	 /**
 	  * 给定一个链表ListNode* pHead，请返回一个bool，代表链表是否为回文。
+	  * 
+	  * 思路：
+	  * 从头遍历链表，把value值取出，存到一个list或者数组中；
+	  * 取两个游标往中间移动比较，
+	  * 如果相同，继续移动，直至中间后，返回true；
+	  * 否则，返回false；
+	  * 
 	  * @param pHead
 	  * @return
 	  */
 	 public boolean isPalindrome(ListNode pHead) {
-	        // write code here
-	    }
+	     if(pHead==null)
+	    	 return false;
+	     List<Integer> list = new ArrayList<Integer>();
+		 while(pHead!=null) {
+			 list.add(pHead.val);
+			 pHead= pHead.next;
+		 }
+		 for(int i=0;i<list.size()/2+1;i++) {
+			 if(list.get(i)!=list.get(list.size()-1-i))
+				 return false;
+		 }
+		 
+		 return true;
+	 }
 	 /**
 	  * main函数
 	  * Test测试
