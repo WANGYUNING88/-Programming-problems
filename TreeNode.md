@@ -24,7 +24,7 @@ import java.util.*;
 
     public class TreeNodeTest {
     
- ##     检查是否
+ ##     检查是否BST
     
     /**
 	 * 	检查一棵二叉树是否为二叉查找树。
