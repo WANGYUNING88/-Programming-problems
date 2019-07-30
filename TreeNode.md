@@ -24,6 +24,55 @@ import java.util.*;
 
     public class TreeNodeTest {
     
+ ##     检查是否
+    
+    /**
+	 * 	检查一棵二叉树是否为二叉查找树。
+	 * 	给定树的根结点指针TreeNode* root，请返回一个bool，代表该树是否为二叉查找树。
+	 * 	
+	 * 	思路：
+	 * 1.已知中序遍历排序二叉查找树，得到的序列应是有序的。
+	 * 2.因此，可以在非递归遍历二叉查找树的中间过程中，取当前遍历节点的值与上一遍历节点值进行比较，
+	 * 	若当前节点的值不小于上一节点的值，则继续遍历至结束，否则，返回false。   
+	 * 3.二叉树中序遍历非递归算法需要借助栈来实现。
+	 * 
+	 * @param root
+	 * @return
+	 */
+	public boolean checkBST(TreeNode root) {
+		
+		if(root==null)
+			return true;
+		Stack<TreeNode> stack = new Stack<TreeNode>();
+		TreeNode temp = root;
+		stack.add(temp);
+		int max = 0;
+		boolean isFirstNum = true;
+		while(!stack.isEmpty()) {
+			if(temp!=null&&temp.left!=null) {
+				stack.add(temp.left);
+				temp = temp.left;
+			}else {
+				temp = stack.pop();
+				if(isFirstNum) {
+					max = temp.val;
+					isFirstNum = false;
+				}else {
+					if(max<temp.val)
+						max = temp.val;
+					else
+						return false;
+				}
+				if(temp!=null&&temp.right!=null) {
+					stack.add(temp.right);
+					temp = temp.right;
+				}else
+					temp=null;
+			}
+		}
+		return true;
+	}
+    
  ##   高度最小的BST 
   
      /**
@@ -95,7 +144,8 @@ import java.util.*;
 	 * 	保证深度不超过树的高度，树上结点的值为非负整数且不超过100000。
 	 * 
 	 * 	思路
-	 * 	使用分层遍历；
+	 * 	利用队列实现非递归分层遍历；
+	 *      因为深度1为根节点，不需要遍历；并且循环第一次就是深度2，循环dep-1次；
 	 * 	
 	 * @return
 	 */
