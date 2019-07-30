@@ -8,6 +8,17 @@ import java.util.*;
         TreeNode right = null;
         public TreeNode(int val) {
             this.val = val;
+	
+# 	ListNode
+	    
+	 class ListNode {
+	    int val;
+	    ListNode next = null;
+
+	    ListNode(int val) {
+		this.val = val;
+	    }
+	}
 
 #  TreeNodeTest
 
