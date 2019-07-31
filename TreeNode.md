@@ -243,6 +243,43 @@ import java.util.*;
 		
     }
 	
+   ##      二叉树和为某值的全部路径
+    
+	/**
+	 * 输入一颗二叉树的根节点和一个整数，打印出二叉树中结点值的和为输入整数的所有路径。
+	 * 路径定义为从树的根结点开始往下一直到叶结点所经过的结点形成一条路径。(注意: 在返回值的list中，数组长度大的数组靠前)
+	 * 
+	 * 思路：
+	 * 利用递归，先序遍历，利用全局变量path记录到每一个叶节点的路径；
+	 * 计算path的和，如诺和target相等，则将新的ArratList<>(paht)
+	 * 加到result中
+	 *  
+	 * @param root
+	 * @param target
+	 * @return
+	 */
+	ArrayList<ArrayList<Integer>> result =new ArrayList<ArrayList<Integer>>();
+	ArrayList<Integer> path  = new ArrayList<Integer>();
+	public ArrayList<ArrayList<Integer>> FindPath(TreeNode root, int target) {
+		if(root==null)
+			return result;
+		path.add(root.val);
+		if(root.left==null&&root.right==null) {
+			int sum = 0;
+			for(int i:path) {
+				sum+=i;
+			}
+			if(sum==target) {
+				result.add(new ArrayList<>(path));
+			}
+			
+		}
+		FindPath(root.left, target);
+		FindPath(root.right, target);
+		path.remove(path.size()-1);
+		return result;
+
+	}
     
     
 	
