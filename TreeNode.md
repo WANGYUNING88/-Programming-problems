@@ -176,4 +176,46 @@ import java.util.*;
 	    
 	 }
         
+##    寻找下一节点
+	
+	/**
+	 * 寻找二叉树中指定结点的下一个结点（即中序遍历的后继）。
+	 * 给定树的根结点指针TreeNode* root和结点的值int p，请返回值为p的结点的后继结点的值。
+	 * 保证结点的值大于等于零小于等于100000且没有重复值，若不存在后继返回-1。
+	 * 
+	 * 思路：
+	 * 要求输出值为P的中序遍历的下一节点的值，我们就可以先中序遍历二叉树；
+	 * 设置两个变量一个记录是否有相同的值，然后是是否输出值；
+	 *
+	 * @param root
+	 * @param p
+	 * @return
+	 */
+	public static int findSucc(TreeNode root, int p) {
+        Stack<TreeNode> stack = new Stack<TreeNode>();
+        TreeNode temp = root;
+        boolean isFind = false;
+        boolean isNext = false;
+        stack.add(temp);
+        while(!stack.isEmpty()) {
+        	if(temp!=null&&temp.left!=null) {
+        		stack.add(temp.left);
+        		temp = temp.left;
+        	}else {
+        		temp = stack.pop();
+        		isFind = temp.val==p?true:false;
+        		if(isNext)
+        			return temp.val;
+        		if(temp!=null&&temp.right!=null) {
+        			stack.add(temp.right);
+        			temp = temp.right;
+        		}else {
+        			temp = null;
+        		}
+        		isNext = isFind?true:false;
+        	}
+        }
+		return -1;
+    }
+	
     }
