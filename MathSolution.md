@@ -78,8 +78,55 @@
               return result;
             }
 
-##     Main方法
+##      平分的直线
 
+	/**
+	 *	在二维平面上，有两个正方形，请找出一条直线，能够将这两个正方形对半分。假定正方形的上下两条边与x轴平行。
+	 *	给定两个vecotrA和B，分别为两个正方形的四个顶点。请返回一个vector，代表所求的平分直线的斜率和截距，保证斜率存在。 
+	 * 
+	 * 	思路：
+	 * 	1，如何平分正方形，必须经过中点，计算两个正方形的中心点，A,B
+	 * 	2.k=(B.Y-A.Y)/(B.X-A.X);
+	 *  3，b = y-k*x;
+	 * 
+	 * @param A
+	 * @param B
+	 * @return
+	 */
+	public static double[] getBipartition(Point[] A, Point[] B) {
+		double[] result = new double[2];
+		double[] centreA = new double[2];
+		double[] centreB = new double[2];
+		
+		for(Point p:A) {
+			centreA[0]+=p.x;
+			centreA[1]+=p.y;
+		}
+
+		centreA[0]=centreA[0]/4;
+		centreA[1]=centreA[1]/4;
+		
+		for(Point p:B) {
+			centreB[0]+=p.x;
+			centreB[1]+=p.y;
+		}
+	
+		centreB[0]=centreB[0]/4;
+		centreB[1]=centreB[1]/4;
+		double k = (centreB[1]-centreA[1])/(centreB[0]-centreA[0]);
+		double b = centreA[1]-k*centreA[0];
+		result[0] = k;
+		result[1] = b;
+		return result;
+        
+             }
+	
+##     Main方法
+            
+            /**
+	 * main方法
+	 * @param args
+	 */
             public static void main(String[] args) {
               int b = 5;
               System.out.println(~b+1);
