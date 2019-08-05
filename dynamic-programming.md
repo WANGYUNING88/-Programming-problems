@@ -34,7 +34,38 @@
 		}
 		return temp;
     }
-	
+    
+  ##      机器人走方格
+
+	/**
+	 * Q：有一个XxY的网格，一个机器人只能走格点且只能向右或向下走，要从左上角走到右下角。请设计一个算法，计算机器人有多少种走法。
+	 * 给定两个正整数int x,int y，请返回机器人的走法数目。保证x＋y小于等于12。
+	 * 
+	 * A:初始化第一行和第一列，因为横着走和竖着走都只有一种方法；
+	 * dp[i][j] = dp[i-1][j]+dp[i][j-1]:即是，到某一格，就是到它左一格或者上一格，
+	 * 
+	 * @param x
+	 * @param y
+	 * @return
+	 */
+	public static int countWays(int x, int y) {
+        int[][] dp = new int[13][13];
+        dp[0][0]=1;
+        for(int i =1;i<y;i++) {
+        	dp[0][i] =1;
+        }
+        for(int i =1;i<x;i++) {
+        	dp[i][0]=1;
+        }
+        for(int i=1;i<x;i++) {
+        	for(int j=1;j<y;j++) {
+        		dp[i][j] = dp[i-1][j]+dp[i][j-1];
+        	}
+        }
+        return dp[x-1][y-1];
+    }
+
+
  ##   main 用来标注或解释问题
 	
 	/**
