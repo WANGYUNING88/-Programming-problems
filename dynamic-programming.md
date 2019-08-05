@@ -35,7 +35,7 @@
 		return temp;
     }
     
-  ##      机器人走方格
+  ##      机器人走方格I
 
 	/**
 	 * Q：有一个XxY的网格，一个机器人只能走格点且只能向右或向下走，要从左上角走到右下角。请设计一个算法，计算机器人有多少种走法。
@@ -64,7 +64,57 @@
         }
         return dp[x-1][y-1];
     }
+    
+  ##      机器人走方格Ii
 
+	/**
+	 * Q:有一个XxY的网格，一个机器人只能走格点且只能向右或向下走，要从左上角走到右下角。
+	 * 请设计一个算法，计算机器人有多少种走法。注意这次的网格中有些障碍点是不能走的。
+	 * 给定一个int[][] map(C++ 中为vector >),表示网格图，若map[i][j]为1则说明该点不是障碍点，否则则为障碍。
+	 * 另外给定int x,int y，表示网格的大小。请返回机器人从(0,0)走到(x - 1,y - 1)的走法数，
+	 * 为了防止溢出，请将结果Mod 1000000007。保证x和y均小于等于50
+	 * 
+	 * A:本题思路和机器人走方格1一样，但是要判断是否有障碍物；
+	 * 
+	 * @param map
+	 * @param x
+	 * @param y
+	 * @return
+	 */
+	public static int countWaysII(int[][] map, int x, int y) {
+        int [][] dp = new int[51][51];
+        
+        boolean xFlag = true;
+        boolean yFlag = true;
+        
+        for(int  i=1;i<x;i++) {
+        	if(map[i][0]==1&&xFlag)
+        		dp[i][0] = 1;
+        	else {
+        		dp[i][0]=0;
+        		xFlag = false;
+        	}
+        }
+        
+        for(int  i=1;i<y;i++) {
+        	if(map[0][i]==1&&yFlag)
+        		dp[0][i] = 1;
+        	else {
+        		dp[0][i]=0;
+        		yFlag = false;
+        	}
+        }
+        for(int i=1;i<x;i++) {
+        	for(int j=1;j<y;j++) {
+        		if(map[i][j]==0)
+        			dp[i][j] = 0;
+        		else
+        			dp[i][j] = (dp[i-1][j]+dp[i][j-1])%1000000007;
+        		
+        	}
+        }
+        return dp[x-1][y-1];
+    }
 
  ##   main 用来标注或解释问题
 	
