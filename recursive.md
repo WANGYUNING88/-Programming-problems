@@ -32,3 +32,42 @@
               return find(A, begin, mid - 1) || find(A, mid + 1, end);
 
             }
+            
+   ##   字符串排序         
+                   
+            /**
+	 * 
+	 * @param A
+	 * @return
+	 */
+	public ArrayList<String> getPermutation(String A) {
+		char[] aChar = A.toCharArray();
+
+		ArrayList<String> list = new ArrayList<>();
+		permutation(list, aChar, 0);
+		Collections.sort(list);
+		Collections.reverse(list);
+		return list;
+	}
+
+	public void permutation(ArrayList<String> result, char[] aChar, int n) {
+
+		if (n == aChar.length) {
+			result.add(new String(aChar));
+			return;
+		}
+		for (int i = n; i < aChar.length; i++) {
+			swap(i, n, aChar);
+			permutation(result, aChar, n + 1);
+			swap(i, n, aChar);
+		}
+	}
+
+	public void swap(int i, int j,char[] aChar) {
+
+		char temp = aChar[i];
+		aChar[i] = aChar[j];
+		aChar[j] = temp;
+	}
+
+
