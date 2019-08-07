@@ -199,6 +199,43 @@ public class StackTest {
 		return asylum;
 	}
 	
+
+
+## 合法括号序列判断
+	
+	/**
+	 * Q:对于一个字符串，请设计一个算法，判断其是否为一个合法的括号串。
+	 * 给定一个字符串A和它的长度n，请返回一个bool值代表它是否为一个合法的括号串。
+	 * 
+	 * A:定义一个栈；遇到（进栈，遇到）且栈非空，出栈，否则返回false
+	 * 如何遇到其他字符，返回false，执行到最后，返回栈是否为空；
+	 * 
+	 * @param A
+	 * @param n
+	 * @return
+	 */
+	public boolean chkParenthesis(String A, int n) {
+		Stack<Character> stack = new Stack<Character>();
+		for(int i=0;i<n;i++) {
+			char temp = A.charAt(i);
+			switch (temp) {
+			case '(':
+				stack.add(temp);
+				break ;
+			case ')':
+				if(stack.isEmpty())
+					return false;
+				stack.pop();
+				break ;
+
+			default:
+				return false;
+			}
+		}
+		return stack.isEmpty();
+	}
+	
+	
 ##	main方法
 	
 	/**
