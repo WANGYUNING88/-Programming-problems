@@ -1,5 +1,7 @@
 #        dynamic programming   动态规划问题解决
 
+
+
 ##  经典问题 爬楼梯
 
     /**
@@ -115,6 +117,57 @@
         }
         return dp[x-1][y-1];
     }
+    
+##  经典问题:硬币
+    
+    /**
+	 * Q：有数量不限的硬币，币值为25分、10分、5分和1分，请编写代码计算n分有几种表示法。
+	 * 给定一个int n，请返回n分有几种表示法。保证n小于等于100000，为了防止溢出，请将答案Mod 1000000007。
+	 * 
+	 * A：依然采用动态规划；要求n分，那么我们可以加上n-25,n-10,n-5和n-1的总数；
+	 * countWays1是一维数组的解法。countWays2是二维数组的思路；
+	 * 
+	 * @param n
+	 * @return
+	 */
+	public static int countWays1(int n) {
+        // write code here
+		int []face_value = {1,5,10,25};
+		int[] dp = new int[n+1];
+		dp[0]=1;
+		if(n==0)
+			return dp[0];
+		
+		for (int i= 0; i < 4; i++) {
+			for(int j=face_value[i];j<=n;j++) {
+				dp[j] = (dp[j] + dp[j - face_value[i]]) % 1000000007;
+		
+			}
+		}
+
+		return dp[n];
+    }
+	
+	public static int countWays2(int n) {
+        // write code here
+		 int A[] = {1, 5, 10, 25}, dp[][] = new int[A.length][n + 1];
+		    for (int j = 0; j <= n; j++) {
+		        dp[0][j] = 1;
+		    }
+		    for (int i = 1; i < A.length; i++) {
+		        for (int j = 0; j <= n; j++) {
+		            int t = j - A[i];
+		            if (t >= 0) {
+		                dp[i][j] = (dp[i - 1][j] + dp[i][t]) % 1000000007;
+		            } else {
+		                dp[i][j] = dp[i - 1][j];
+		            }
+		        }
+		    }
+		 
+		    return dp[A.length - 1][n];
+    }
+	
 
  ##   main 用来标注或解释问题
 	
