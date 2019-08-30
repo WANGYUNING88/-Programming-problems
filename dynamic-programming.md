@@ -1,6 +1,36 @@
 #        dynamic programming   动态规划问题解决
 
+##	
+	/**
+	 * 最大连续子序和
+	 * 
+	 *思路：到第i的为最后一个数的数组最大连续子序和（sums[i]）是到第i-1个的数组的最大连续子序和(sums[i-1])与第i的数的和(nums[i])，
+	 *即是sums[i-1]+nums[i]与第i个数(nums[i])比较取最大的数。即公式是nums[i]=Math.MAX(nums[i-1]+nums[i],nums[i];
+	 * @param n
+	 * @return
+	 */
+	public static void getNum() {
 
+		Scanner sc = new Scanner(System.in);
+
+		int N = sc.nextInt();
+		int[] nums = new int[N];
+		for (int i = 0; i < N; i++) {
+			nums[i] = sc.nextInt();
+		}
+
+		int[] sums = new int[N];
+		sums[0] = nums[0];
+		int max = sums[0];
+		for (int i = 1; i < N; i++) {
+			sums[i] = Math.max(nums[i], sums[i - 1] + nums[i]);
+			max = Math.max(max, sums[i]);
+			//System.out.println("第"+i+"个sums:"+sums[i]);
+		}
+
+		System.out.println(max);
+	
+	}
 
 ##  经典问题 爬楼梯
 
