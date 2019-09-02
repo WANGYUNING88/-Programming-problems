@@ -1,5 +1,48 @@
 #        dynamic programming   动态规划问题解决
 
+##	最长递增子序列（LCS） 
+	/**
+	 * 	Q:给定一个序列 An = a1 ,a2 ,  ... , an ，
+	 * 	找出最长的子序列使得对所有 i < j ，ai < aj 。求出这个子序列的长度
+	 * 
+	 *	A:dp[i]: 表示以a[i]为结尾的最长递增子序列的长度
+	 *	dp[i] = 1    i属于[0, len(a))
+   	 *	i属于[0, len(a))
+	 *	if (a[j] <= a[i]) dp[i] = max(dp[i], dp[j] + 1)  j属于[0, i)
+	 * @param 
+	 * @return
+	 */
+	public static void getNum() {
+
+		Scanner sc = new Scanner(System.in);
+
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		String an = sc.nextLine();
+		String[] strings = an.split(" ");
+		if(strings.length==0) {
+			System.out.println(0);
+			return;
+		}
+		for (String s : strings) {
+			list.add(Integer.parseInt(s));
+		}
+
+		int[] counts = new int[list.size()];
+		int max = 0;
+		for (int i = 0; i < counts.length; i++) {
+			counts[i] = 1;
+			for (int j = 0; j < i; j++) {
+				if (list.get(i) >= list.get(j))
+					counts[i] = Math.max(counts[i], counts[j] + 1);
+				// System.out.println("第"+i+"是"+counts[i]);
+			}
+			max = Math.max(max, counts[i]);
+		}
+
+		System.out.println(max);
+
+	}
+
 ##	整数成绩最大化
 	/**整数成绩最大化
 	 * Q:给出一个整数n，将n分解为至少两个整数之和，
