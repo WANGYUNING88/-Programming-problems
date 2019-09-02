@@ -1,6 +1,36 @@
 #        dynamic programming   动态规划问题解决
 
-##	
+##	整数成绩最大化
+	/**整数成绩最大化
+	 * Q:给出一个整数n，将n分解为至少两个整数之和，
+	 * 	使得这些整数的乘积最大化，输出能够获得的最大的乘积。 
+	 * A:最大收益是3，余数为1则分给其中一个3,得到4，余数为2则乘上去
+	 * 	所以只需要列举出递推的前三项，第4、5、6项，然后递推a[i]=a[i-3]*3
+	 * @param n
+	 * @return
+	 */
+	public static void getNums() {
+
+		Scanner sc = new Scanner(System.in);
+
+		int n = sc.nextInt();
+		int[] result = new int[n > 6 ? n : 6];
+		int[] temp = { 0, 1, 2, 4, 6, 9 };
+		if (n <= 6) {
+			System.out.println(temp[n - 1]);
+		} else {
+			for (int i = 0; i < 6; i++) {
+				result[i] = temp[i];
+			}
+			for (int i = 6; i < n; i++) {
+				result[i] = result[i - 3] * 3;
+			}
+			System.out.println(result[n - 1]);
+		}
+
+	}
+
+##	最大连续子序和
 	/**
 	 * 最大连续子序和
 	 * 
