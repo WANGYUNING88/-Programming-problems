@@ -1,5 +1,32 @@
 #        dynamic programming   动态规划问题解决
 
+##	最大公共子串
+	/**
+	 * 	Q:给定两个字符串，请编写代码，输出最长公共子串（Longest Common Substring），
+	 * 	是指两个字符串中的最长的公共子串，要求子串一定是连续
+	 * 	A:简单的动态规划问题，如果s1==s2,那么dp[i][j] = 1+dp[i-1][j-1],否则就是0;
+	 */
+	public static void getLongestCommonSubstring() {
+		Scanner sc = new Scanner(System.in);
+		String s = sc.nextLine();
+		String[] ss = s.split(",");
+		int max = 0;
+		int[][] dp = new int[ss[0].length()][ss[1].length()];
+		for(int i=0;i<ss[1].length();i++) {
+			dp[0][i] = ss[0].charAt(0)==ss[1].charAt(i)?1:0;
+		}
+		for(int i=0;i<ss[0].length();i++) {
+			dp[i][0] = ss[1].charAt(0)==ss[0].charAt(i)?1:0;
+		}
+		for(int i=1;i<ss[0].length();i++) {
+			for(int j =1;j<ss[1].length();j++) {
+				dp[i][j] =  ss[0].charAt(i)==ss[1].charAt(j)?(dp[i-1][j-1]+1):0;
+				max = Math.max(max, dp[i][j]);
+			}
+		}
+		System.out.println(max);
+	}
+
 ##	最长递增子序列（LCS） 
 	/**
 	 * 	Q:给定一个序列 An = a1 ,a2 ,  ... , an ，
