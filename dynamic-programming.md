@@ -1,5 +1,42 @@
 #        dynamic programming   动态规划问题解决
 
+##	目的地最短步数
+	/**
+	 *  考虑你从家出发步行去往一处目的地，该目的地恰好离你整数单位步长（大于等于1）。
+	 *  你只能朝向该目的地或者背向该目的地行走，而你行走的必须为单位步长的整数倍，且要求你第N次行走必须走N步。
+	 *  请就给出目的地离你距离，判断你是否可以在有限步内到达该目的地。
+	 *  如果可以到达的话，请计算到达目的地的最短总步数(不能到达则输出-1)。 
+	 *	
+	 * 广度优先遍历算法
+	 * [0]             第0层，
+	 * [1, -1]         第1层，上层的结果 +1，-1
+	 * [3, -1, 1, -3]  第2层，上层的结果 +2，-2
+	 * ...             第i层，上层的结果 +i，-i
+	 * 	
+	 */
+	public static void getStepNum() {
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		HashSet<Integer> set = new HashSet<Integer>();
+		set.add(0);
+		int i=0;
+		while(true) {
+			if(set.contains(n))
+				break;
+			i++;
+			HashSet<Integer> temp = (HashSet<Integer>) set.clone();
+			set.clear();
+			for(int s :temp) {
+				set.add(s+i);
+				set.add(s-i);
+			}
+			
+		}
+		System.out.println(i);
+		
+	}
+	
+
 ##	叠罗汉I
 	/**
 	 *  叠罗汉是一个著名的游戏，游戏中一个人要站在另一个人的肩膀上。同时我们应该让下面的人比上面的人更高一点。
