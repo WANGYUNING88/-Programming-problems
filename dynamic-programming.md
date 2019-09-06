@@ -1,5 +1,56 @@
 #        dynamic programming   动态规划问题解决
 
+##	考试策略
+	/**
+	 *  小明同学在参加一场考试，考试时间2个小时。试卷上一共有n道题目，小明要在规定时间内，完成一定数量的题目。 
+	 *   考试中不限制试题作答顺序，对于 i 第道题目，小明有三种不同的策略可以选择:  
+	 *  (1)直接跳过这道题目，不花费时间，本题得0分。
+	 *	(2)只做一部分题目，花费pi分钟的时间，本题可以得到ai分。  
+	 *	(3)做完整个题目，花费qi分钟的时间，本题可以得到bi分。 
+	 *	小明想知道，他最多能得到多少分。 
+	 *
+	 *	思路：
+	 *	典型的01背包问题，物品的迭代在外层循环，费用的迭代在内层循环，注意一下下标 ；
+	 *	如果(pi[i] <= j) ;比较dp[i][j], dp[i - 1][j - pi[i]] + ai[i]并取最大的数；//做不完题的情况
+	 *	接下来如果(qi[i] <= j) ;比较dp[i][j], dp[i - 1][j - qi[i]] + ai[i]并取最大的数；//做完本题的情况；
+	 *	以上两条就是动态方程
+	 * @throws IOException
+	 */
+	public static void getTheHighestScore1() throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int n = Integer.parseInt(br.readLine());
+		int[] pi = new int[n + 1];
+		int[] ai = new int[n + 1];
+		int[] qi = new int[n + 1];
+		int[] bi = new int[n + 1];
+		pi[0] = 0;
+		ai[0] = 0;
+		qi[0] = 0;
+		bi[0] = 0;
+
+		for (int i = 1; i <= n; i++) {
+
+			String[] s = br.readLine().split(" ");
+			pi[i] = Integer.parseInt(s[0]);
+			ai[i] = Integer.parseInt(s[1]);
+			qi[i] = Integer.parseInt(s[2]);
+			bi[i] = Integer.parseInt(s[3]);
+		}
+		int[][] dp = new int[n + 1][121];
+		// 初始化
+		dp[0][0] = 0;
+		for (int i = 1; i <= n; i++) {
+			for (int j = 0; j <= 120; j++) {
+				dp[i][j] = dp[i - 1][j];
+				if (!(pi[i] > j))
+					dp[i][j] = Math.max(dp[i][j], dp[i - 1][j - pi[i]] + ai[i]);
+				if (!(qi[i] > j))
+					dp[i][j] = Math.max(dp[i][j], dp[i - 1][j - qi[i]] + bi[i]);
+			}
+		}
+		System.out.println(dp[n][120]);
+	}
+
 ##	目的地最短步数
 	/**
 	 *  考虑你从家出发步行去往一处目的地，该目的地恰好离你整数单位步长（大于等于1）。
