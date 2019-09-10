@@ -1,5 +1,44 @@
 #        dynamic programming   动态规划问题解决
 
+
+##	精灵鼠从入口到出口的最少减少速度
+	/**
+	 *  猛兽侠中精灵鼠在利剑飞船的追逐下逃到一个n*n的建筑群中，精灵鼠从（0,0）的位置进入建筑群，建筑群的出口位置为（n-1,n-1），
+	 *  建筑群的每个位置都有阻碍，每个位置上都会相当于给了精灵鼠一个固定值减速，
+	 *  因为精灵鼠正在逃命所以不能回头只能向前或者向下逃跑，现在问精灵鼠最少在减速多少的情况下逃出迷宫？ 
+	 *  
+	 *  基本dp方法:
+	 *  dp[i][j]=map[i][j]+min(dp[i-1][j],dp[i][-1]);
+	 * @throws NumberFormatException
+	 * @throws IOException
+	 */
+	public static void getSpeedOfReduction() throws NumberFormatException, IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int n = Integer.parseInt(br.readLine());
+		int [][]map = new int[n][n];
+		for(int i=0;i<n;i++) {
+			String[] arr =  br.readLine().split(",");
+			for(int j=0;j<n;j++) {
+				map[i][j]=Integer.parseInt(arr[j]);
+			}
+ 		}
+		int[][] dp = new int[n][n];
+		dp[0][0] = map[0][0];
+		for(int i=1;i<n;i++) {
+			dp[i][0]=map[i][0]+dp[i-1][0];
+		}
+		for(int i=1;i<n;i++) {
+			dp[0][i]=map[0][i]+dp[0][i-1];
+		}
+		for(int i=1;i<n;i++) {
+			for(int j=1;j<n;j++) {
+				dp[i][j] = map[i][j]+(dp[i-1][j]>dp[i][j-1]?dp[i][j-1]:dp[i-1][j]);
+			}
+		}
+		System.out.println(dp[n-1][n-1]);
+
+	}
+
 ##	01背包问题	
 	/**
 	 *  有5个物品，其重量分别是X{2, 2, 6, 5, 4}，价值分别为W{6, 3, 5, 4, 6}，背包的容量为10。
