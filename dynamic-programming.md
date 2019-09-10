@@ -2,10 +2,12 @@
 
 ##	01背包问题	
 	/**
-	 * 有5个物品，其重量分别是X{2, 2, 6, 5, 4}，价值分别为W{6, 3, 5, 4, 6}，背包的容量为10。
+	 *  有5个物品，其重量分别是X{2, 2, 6, 5, 4}，价值分别为W{6, 3, 5, 4, 6}，背包的容量为10。
 	 * 求选择装入的物品，使装入的物品总价值最大？
-	 * @param args
-	 * @throws IOException
+	 * 
+	 * @param goods 物品数组
+	 * @param price 物品价值
+	 * @param volume 背包容量
 	 */
 	public static void getMax(int [] goods,int [] price, int volume) {
 		
