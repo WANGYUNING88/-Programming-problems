@@ -1,5 +1,30 @@
 #        dynamic programming   动态规划问题解决
 
+##	01背包问题	
+	/**
+	 * 有5个物品，其重量分别是X{2, 2, 6, 5, 4}，价值分别为W{6, 3, 5, 4, 6}，背包的容量为10。
+	 * 求选择装入的物品，使装入的物品总价值最大？
+	 * @param args
+	 * @throws IOException
+	 */
+	public static void getMax(int [] goods,int [] price, int volume) {
+		
+		int dp [][] = new int[goods.length+1][volume+1];
+		
+		for(int i=1;i<goods.length+1;i++) {
+			for(int j=1;j<volume+1;j++) {
+				if(j>=goods[i-1]) {
+					dp[i][j]=Math.max(dp[i-1][j], dp[i-1][j-goods[i-1]]+price[i-1]);
+				}else {
+					dp[i][j] = dp[i-1][j];
+				}
+			}
+		}
+		
+		System.out.println(dp[goods.length][volume]);
+		
+	}
+
 ##	考试策略
 	/**
 	 *  小明同学在参加一场考试，考试时间2个小时。试卷上一共有n道题目，小明要在规定时间内，完成一定数量的题目。 
