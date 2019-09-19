@@ -24,6 +24,66 @@
 
       }
 
+##  二叉搜索树的后序遍历
+        /**
+	 * 输入一个整数数组，判断该数组是不是某二叉搜索树的后序遍历的结果。
+	 * 如果是则输出Yes,否则输出No。假设输入的数组的任意两个数字都互不相同。
+	 * 
+	 * 思路：
+	 * 后序遍历 的序列中，最后一个数字是树的根节点 ，数组中前面的数字可以分为两部分：
+	 * 第一部分是左子树节点 的值，都比根节点的值小；第二部分 是右子树 节点的值，都比 根 节点 的值大，
+	 * 后面用递归分别判断前后两部分 是否 符合以上原则
+	 * @param sequence
+	 * @return
+	 */
+	public static boolean VerifySquenceOfBST(int[] sequence) {
+		
+		if(sequence==null||sequence.length==0)
+			return false;
+		if(sequence.length==1) {
+			return true;
+		}
+		int root = sequence[sequence.length-1];
+		int index = 0;
+		List<Integer> leftList = new ArrayList<Integer>();
+		List<Integer> rightList = new ArrayList<Integer>();
+		for(int i=0;i<sequence.length-1;i++) {
+			if(root>sequence[i])
+				leftList.add(sequence[i]);
+			else {
+				index=i;
+				break;
+			}
+		}
+		if(leftList.size()!=(sequence.length-1)) {
+			for(int i=index;i<sequence.length-1;i++) {
+				if(root<sequence[i])
+					rightList.add(sequence[i]);
+				else {
+					return false;
+				}
+			}
+		}
+		
+		boolean l = leftList.size()==0 ||VerifySquenceOfBST(getArray(leftList));
+		boolean r = rightList.size()==0 ||VerifySquenceOfBST(getArray(rightList));
+ 		return l&&r;
+
+	}
+	public  static int[] getArray(List<Integer> list) {
+		if(list.size()==0) {
+			return null;
+		}
+		int [] result = new int [list.size()];
+		int i=0;
+		for(int j :list) {
+			result[i]=j;
+			i++;
+		}
+		return result;
+		
+	}
+
 ##  树的子结构
 
 ####  得到next数组
