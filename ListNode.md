@@ -2,6 +2,31 @@
 #         ListTest
 
 	public class ListTest {
+	
+##	两个链表的第一个公共结点
+	
+	/**
+	 * Q：输入两个链表，找出它们的第一个公共结点。
+	 * A：用两个指针扫描”两个链表“，最终两个指针到达 null 或者到达公共结点。 
+	 * @param pHead1
+	 * @param pHead2
+	 * @return
+	 */
+	public static ListNode FindFirstCommonNode(ListNode pHead1, ListNode pHead2) {
+		 ListNode l1 = pHead1;
+		 ListNode l2 = pHead2;
+		 while(l1!=l2) {
+			 if(l1!=null)
+				 l1 = l1.next;
+			 else
+				 l1 = pHead2;
+			 if(l2!=null) 
+				 l2 = l2.next;
+			 else
+				 l2 = pHead1;
+		 }
+		 return l1;
+    }
 
 ##	 查出倒数第K个节点的值	
 
