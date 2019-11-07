@@ -6,11 +6,7 @@ import java.util.Date;
 /** 
  *  
  * 功能描述： 
- *  
- * @author Administrator 
- * @Date Jul 19, 2008 
- * @Time 9:47:53 AM 
- * @version 1.0 
+ *时间工具包类
  */  
 public class DateUtil {  
   
