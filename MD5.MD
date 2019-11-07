@@ -1,9 +1,7 @@
 
-    package com.test.test;  
       
     /************************************************ 
-    MD5 算法的Java Bean 
-    Last Modified:10,Mar,2001 
+ 
      *************************************************/  
     import java.io.File;  
     import java.io.FileInputStream;  
